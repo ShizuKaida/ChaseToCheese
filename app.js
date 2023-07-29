@@ -14,7 +14,8 @@ const db = require("./enyaresHelper/dbConn.js")();
 
 //secretKey
 
-app.set("api_secret_key", process.env.API_SECRET_KEY);
+
+app.set("api_secret_key", "THIS_IS_VERY_SECRET_API_KEY");
 //verifyToken
 const verifyToken = require("./middleware/verifyToken");
 

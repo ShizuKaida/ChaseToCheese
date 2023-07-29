@@ -32,7 +32,7 @@ router.post("/loginOrRegister", async function (req, res, next) {
       payload = { nickname: user?.nickname, id: user?._id, isPremiumUser: user?.isPremiumUser };
     }
     console.log(payload);
-    const tokenRes = await jwt.sign(payload, process.env.API_SECRET_KEY, {
+    const tokenRes = await jwt.sign(payload, "THIS_IS_VERY_SECRET_API_KEY", {
       expiresIn: 72000,
     });
     return res.json({ token: tokenRes });
