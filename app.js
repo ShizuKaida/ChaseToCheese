@@ -13,8 +13,8 @@ const app = express();
 const db = require("./enyaresHelper/dbConn.js")();
 
 //secretKey
-const config = require("./config");
-app.set("api_secret_key", config.api_secret_key);
+
+app.set("api_secret_key", process.env.API_SECRET_KEY);
 //verifyToken
 const verifyToken = require("./middleware/verifyToken");
 

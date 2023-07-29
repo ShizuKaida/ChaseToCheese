@@ -5,6 +5,7 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const Score = require("../models/Score");
 const { default: mongoose } = require("mongoose");
+require('dotenv').config()
 
 
 router.get("/", function (req, res, next) {
@@ -31,7 +32,7 @@ router.post("/loginOrRegister", async function (req, res, next) {
       payload = { nickname: user?.nickname, id: user?._id, isPremiumUser: user?.isPremiumUser };
     }
     console.log(payload);
-    const tokenRes = await jwt.sign(payload, req.app.get("api_secret_key"), {
+    const tokenRes = await jwt.sign(payload, process.env.API_SECRET_KEY, {
       expiresIn: 72000,
     });
     return res.json({ token: tokenRes });
