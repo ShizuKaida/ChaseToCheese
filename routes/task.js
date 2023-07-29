@@ -12,7 +12,7 @@ router.post("/savePlayerScore", async function (req, res, next) {
     const { userScore } = req.body;
     const token = req.headers["x-access-token"];
     const decoded = jwt.decode(token);
-    const { id, nickname } = decoded;
+    const { id, nickname,isPremiumUser } = decoded;
 
     if (decoded === -1) {
       return res.status(401).json({ msg: "Unauthorized" });
@@ -38,7 +38,7 @@ router.post("/savePlayerScore", async function (req, res, next) {
 
       playerScore.topScores = updatedTopScores;
       const updatedPlayerScore = await playerScore.save();
-      res.json(updatedPlayerScore);
+      
 
       
       const userScoreboard = await Score.findOne({ userId: id });
@@ -47,6 +47,7 @@ router.post("/savePlayerScore", async function (req, res, next) {
         const newUserScoreboard = new Score({
           userId: id,
           nickname,
+          isPremiumUser,
           userScore: Math.max(...updatedTopScores.map((item) => parseInt(item.score))),
         });
         await newUserScoreboard.save();
@@ -55,6 +56,7 @@ router.post("/savePlayerScore", async function (req, res, next) {
         userScoreboard.userScore = Math.max(...updatedTopScores.map((item) => parseInt(item.score)));
         await userScoreboard.save();
       }
+      res.json(updatedPlayerScore);
     }
   } catch (err) {
     console.log("Error:", err);
