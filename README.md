@@ -5,3 +5,6 @@ https://github.com/tafukukki/template-react-master/tree/d60804f5eadb8b035639e311
 
 # ChaseToCheese Project Unity github link 
 https://github.com/ShizuKaida/UnityCodesChase2C
+
+# ChaseToCheese Project Solana Smart Contract github link
+https://github.com/tafukukki/addScoreRust
