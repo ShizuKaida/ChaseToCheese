@@ -13,4 +13,4 @@ https://github.com/tafukukki/addScoreRust
 https://www.canva.com/design/DAFqDhMoo9E/kRKAeTZutTfIQnNF2XIncg/edit?utm_content=DAFqDhMoo9E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # ChaseToCheese Project Presentation Video
-https://we.tl/t-pp1V4j3MEI
+https://www.youtube.com/watch?v=OygNiTVFVOE
