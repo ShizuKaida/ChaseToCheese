@@ -44,7 +44,7 @@ router.post("/loginOrRegister", async function (req, res, next) {
 router.get("/freeLeaderboard", async function (req, res, next) {
   try {
     
-    const leaderboard = await Score.find().sort({ userScore: -1 }).limit(5);
+    const leaderboard = await Score.find().sort({ userScore: -1 }).limit(10);
     const simplifiedLeaderboard = leaderboard.map((player) => {
       return {
         userScore: player.userScore,
@@ -61,7 +61,7 @@ router.get("/premiumLeaderboard", async function (req, res, next) {
   try {
     console.log("premiumLeaderboard")
     const leaderboard = await Score.find({ isPremiumUser : true  }).sort({ userScore: -1 }).limit(10);
-    console.log("Çıtkı kontrol",leaderboard)
+    console.log("Çitki kontrol",leaderboard)
     const simplifiedLeaderboard = leaderboard.map((player) => {
       return {
         userScore: player.userScore,

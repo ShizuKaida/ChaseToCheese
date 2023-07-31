@@ -7,10 +7,7 @@ const playerScoreSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  nickname:{
-    type:String,
-    required:true
-  },
+  
   topScores: [
     {
       score: {
@@ -25,4 +22,4 @@ const playerScoreSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("PlayerScore", playerScoreSchema);
+module.exports = mongoose.model("PlayerScores", playerScoreSchema);

@@ -2,13 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ScoreSchema = new Schema({
-  nickname: {
-    type: String,
-    unique: true,
-  },
-   isPremiumUser: {
-    type: Boolean,
-  },
+ 
   userScore: {
     type : Number
   },
@@ -17,4 +11,4 @@ const ScoreSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("userScoreBoard", ScoreSchema);
+module.exports = mongoose.model("Score", ScoreSchema);
