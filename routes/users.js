@@ -84,4 +84,34 @@ router.get("/premiumLeaderboard", async function (req, res, next) {
     res.json(err);
   }
 });
+router.get("/checkPremiumMembership", async (req, res) => {
+  try {
+    const token = req.headers["x-access-token"];
+    const decoded = jwt.decode(token);
+    const { id } = decoded;
+
+    const user = await User.findOne({ id });
+
+    if (!user) {
+      return res.status(404).json({ error: "Kullanici bulunamadi" });
+    }
+
+    const premiumMembership = await Premium.findOne({ userId: user._id });
+
+    if (!premiumMembership || premiumMembership.expiresAt < new Date()) {
+      // Premium üyelik yok veya süresi dolmuşsa
+      // isPremiumUser alanını false yaparak kullanıcının premium üyeliğini iptal ediyoruz
+      user.isPremiumUser = false;
+      await user.save();
+
+      return res.json({ isPremium: false });
+    }
+
+    // Premium üyelik var ve süresi dolmamışsa
+    res.json({ isPremium: true, expirationDate: premiumMembership.expiresAt });
+  } catch (err) {
+    console.error("Hata:", err);
+    res.status(500).json({ error: "Bir hata oluştu" });
+  }
+});
 module.exports = router;
