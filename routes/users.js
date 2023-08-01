@@ -59,13 +59,23 @@ router.get("/freeLeaderboard", async function (req, res, next) {
 });
 router.get("/premiumLeaderboard", async function (req, res, next) {
   try {
-    console.log("premiumLeaderboard")
-    const leaderboard = await Score.find({ isPremiumUser : true  }).sort({ userScore: -1 }).limit(10);
-    console.log("Çitki kontrol",leaderboard)
+    
+    const premiumUsers = await User.find({ isPremiumUser: true });
+
+    
+    const premiumUserIds = premiumUsers.map(user => user._id);
+
+   
+    const leaderboard = await Score.find({ userId: { $in: premiumUserIds } })
+      .sort({ userScore: -1 })
+      .limit(10);
+
+    console.log("Çitki kontrol", leaderboard);
+
     const simplifiedLeaderboard = leaderboard.map((player) => {
       return {
         userScore: player.userScore,
-        nickname: player.nickname
+        nickname: player.nickname,
       };
     });
 
